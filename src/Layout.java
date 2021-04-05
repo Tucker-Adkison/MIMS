@@ -1,7 +1,5 @@
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 import javax.swing.BoxLayout;
@@ -31,8 +29,7 @@ public class Layout {
         listPanel = new JPanel();
     }
 
-    
-
+    // create a tabbed pane with two tabs 
     public void addTabPane() {
         JFrame frame = MIMS.getFrame();
         tabbed_pane = new JTabbedPane();
@@ -47,7 +44,7 @@ public class Layout {
         tabbed_pane.addChangeListener(new ChangeListener(){
             public void stateChanged(ChangeEvent e) {
                 if (tabbed_pane.getSelectedIndex() == 1) {
-                    // TODO add a JList tabbed pane with prescriptions from the database
+                    // TODO add a JList to the panel at index 1 
                     return;
                 }
             }
@@ -55,12 +52,14 @@ public class Layout {
         });
     }
 
+    // make a menu pane which adds a "database tab" for logging into the database 
     public void addMenuPane() {
         JFrame frame = MIMS.getFrame();
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Settings");
         menuBar.add(menu);
         
+        // create the JPanel to add to the "database tab"
         JPanel settings = new JPanel();
         settings.setLayout(new BoxLayout(settings, BoxLayout.PAGE_AXIS));
         
@@ -77,6 +76,8 @@ public class Layout {
         settings.add(db_password);
 
         JButton submit = new JButton("Submit");
+        // get username and password fields if submit is pressed
+        // delete the database tab from the tabbed pane
         submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 db_username_s = db_username.getText();
@@ -89,6 +90,7 @@ public class Layout {
 
         settings.add(submit);
 
+        // if the menuitem is pressed, then add database tab
         menu.addMenuListener(new MenuListener() {
             public void menuSelected(MenuEvent e) {
                 tabbed_pane.addTab("Database", settings);
@@ -105,6 +107,7 @@ public class Layout {
         frame.revalidate();
     }
 
+    // panel for making a new prescription
     public JPanel newPresciption() {
         JPanel p = new JPanel();
         p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
@@ -126,7 +129,7 @@ public class Layout {
         }  
 
         JButton add_button = new JButton("Add Presciption");
-        // action listener for add_button
+        // when add is pressed, then a new prescription is added to the database
         add_button.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
