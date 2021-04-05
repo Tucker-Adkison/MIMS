@@ -1,6 +1,6 @@
 import javax.swing.JFrame;
 
-class MMIS {
+class MIMS {
 
     private static int frame_size = 400;
     private static JFrame frame;
@@ -15,6 +15,7 @@ class MMIS {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Layout layout = new Layout();
         layout.addTabPane();
+        layout.addMenuPane();
     }
 
     public static JFrame getFrame() {
