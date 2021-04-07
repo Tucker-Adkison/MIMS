@@ -1,8 +1,13 @@
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Database {
    private Connection conn;
-   //TODO create methods to add and get from the datbase
+   //TODO create methods to add and get from the database
    public Database(String db_name, String username, String password) throws SQLException{
       conn = DriverManager.getConnection(db_name, username, password);
       conn.close();

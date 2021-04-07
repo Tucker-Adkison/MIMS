@@ -15,7 +15,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import javax.swing.*;
 
 public class Layout {
    private JPanel listPanel;
@@ -147,6 +146,7 @@ public class Layout {
                String last_name = field_list[1].getText();
                String drug = field_list[2].getText();
                String quantity = field_list[3].getText();
+               Prescription p = new Prescription(first_name, last_name, drug, quantity);
             
             // if the quantity is not an integer then do not set the presciption
                try {
@@ -160,6 +160,7 @@ public class Layout {
                   else 
                      err = new JLabel("Could connect to the database");
                }
+               db.addPrescription(p);
             }
          });
    
