@@ -7,7 +7,7 @@ import java.io.*;
 public class test {
    public static void main(String [] args) {
       Prescription p = new Prescription("John", "Smith", "Tylenol", "5");
-        
+      //Serialization
       try {
          FileOutputStream fileOut =
             new FileOutputStream("prescriptions.ser");
@@ -20,6 +20,7 @@ public class test {
          i.printStackTrace();
       }
 
+      //Deserialization
       p = null;
       try {
          FileInputStream fileIn = new FileInputStream("prescriptions.ser");
