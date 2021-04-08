@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 public class Layout {
    private JPanel listPanel;
    private JTabbedPane tabbed_pane;
+   private JLabel err;
+   
 
    public Layout() {
       listPanel = new JPanel();
@@ -75,6 +77,7 @@ public class Layout {
       // when add is pressed, then a new prescription is added to the database
       add_button.addActionListener(
          new ActionListener() {
+            
          
             public void actionPerformed(ActionEvent e) {
                for (int i = 0; i < num_pairs; i++) {
@@ -86,15 +89,27 @@ public class Layout {
                String last_name = field_list[1].getText();
                String drug = field_list[2].getText();
                String quantity = field_list[3].getText();
-               Prescription p = new Prescription(first_name, last_name, drug, quantity);
             
             // if the quantity is not an integer then do not set the presciption
+               JPanel pane = (JPanel) tabbed_pane.getSelectedComponent();
                try {
                   Integer.parseInt(field_list[3].getText());
                } catch (NumberFormatException ex) {
-                  JLabel err = new JLabel("Could not add Prescription");
-                  ex.printStackTrace();
+                  if (err == null) {
+                     err = new JLabel("Could not add Prescription");
+                     pane.add(err);
+                     MIMS.getFrame().revalidate();
+                  }
+                  return;
+                  // ex.printStackTrace();
                }
+               if (err != null) {
+                  System.out.println(err);
+                  pane.remove(err);
+                  MIMS.getFrame().repaint();
+                  err = null;
+               }
+               Prescription p = new Prescription(first_name, last_name, drug, quantity);
                Save.addPrescription(p);
             }
          });
