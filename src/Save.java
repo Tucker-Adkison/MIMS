@@ -5,6 +5,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;  
+
 public class Save {
    /**
     * This method takes an array of prescriptions and then writes it
@@ -71,5 +74,11 @@ public class Save {
       }
       list.remove(p);
       serializeArray(list);
+   }
+
+   public static String timeStamp() {
+      DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+      LocalDateTime now = LocalDateTime.now();
+      return dtf.format(now);
    }
 }

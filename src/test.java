@@ -6,7 +6,7 @@ import java.io.*;
  *********************************************************************/
 public class test {
    public static void main(String [] args) {
-      Prescription p = new Prescription("John", "Smith", "Tylenol", "5");
+      Prescription p = new Prescription("John", "Smith", "Tylenol", "5", Save.timeStamp());
       //Serialization
       try {
          FileOutputStream fileOut =
@@ -42,5 +42,6 @@ public class test {
       System.out.println("Last Name: " + p.getName()[1]);
       System.out.println("Drug: " + p.getDrug());
       System.out.println("Quantity: " + p.getQuantity());
+      System.out.println("Time-stamp: " + p.getTimestamp());
    }
 }

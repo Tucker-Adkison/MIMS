@@ -85,10 +85,12 @@ public class Layout {
                      return;
                   }
                }
+
                String first_name = field_list[0].getText();
                String last_name = field_list[1].getText();
                String drug = field_list[2].getText();
                String quantity = field_list[3].getText();
+               String time_stamp = Save.timeStamp();
             
             // if the quantity is not an integer then do not set the presciption
                JPanel pane = (JPanel) tabbed_pane.getSelectedComponent();
@@ -109,7 +111,7 @@ public class Layout {
                   MIMS.getFrame().repaint();
                   err = null;
                }
-               Prescription p = new Prescription(first_name, last_name, drug, quantity);
+               Prescription p = new Prescription(first_name, last_name, drug, quantity, time_stamp);
                Save.addPrescription(p);
             }
          });

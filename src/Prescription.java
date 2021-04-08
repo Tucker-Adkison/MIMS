@@ -9,12 +9,14 @@ public class Prescription implements Serializable{
    private String last_name;
    private String drug;
    private int quantity;
+   private String time_stamp;
 
-   public Prescription(String fn, String ln, String d, String q) {
+   public Prescription(String fn, String ln, String d, String q, String ts) {
       first_name = fn;
       last_name = ln;
       drug = d;
       quantity = Integer.parseInt(q);
+      time_stamp = ts;
    } 
 
    public String toString() {
@@ -32,6 +34,10 @@ public class Prescription implements Serializable{
 
    public int getQuantity() {
       return quantity;
+   }
+
+   public String getTimestamp() {
+      return time_stamp;
    }
 
    // setters 
