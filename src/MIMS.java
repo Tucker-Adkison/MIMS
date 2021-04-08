@@ -15,7 +15,6 @@ class MIMS {
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       Layout layout = new Layout();
       layout.addTabPane();
-      layout.addMenuPane();
    }
 
    public static JFrame getFrame() {
