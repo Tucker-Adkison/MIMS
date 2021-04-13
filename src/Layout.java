@@ -1,3 +1,11 @@
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
@@ -13,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
+import java.awt.Dimension;
+
 public class Layout {
    private JPanel listPanel;
    private JTabbedPane tabbed_pane;
@@ -21,6 +31,7 @@ public class Layout {
 
    public Layout() {
       listPanel = new JPanel();
+      listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.X_AXIS));
    }
 
    // create a tabbed pane with two tabs 
@@ -34,21 +45,32 @@ public class Layout {
    
       JPanel list_panel = listPanel;
       tabbed_pane.addTab("Prescriptions", list_panel);
-   
+
       tabbed_pane.addChangeListener(
          new ChangeListener(){
             public void stateChanged(ChangeEvent e) {
                if (tabbed_pane.getSelectedIndex() == 1) {
                   Prescription[] p = Save.deserializeArray().toArray(new Prescription[0]);
-                  JLabel labels = new JLabel("First Name\tSecond Name\tDrug\tQuantity\tTime-Stamp\t");
-                  labels.setAlignmentX(Component.CENTER_ALIGNMENT);
-                  JList<Prescription> list = new JList<Prescription>(p);
+                  Object[][] data = new Object[5][p.length];
+                  List<Prescription> prescription_list = new ArrayList<Prescription>();
+                  for (int i = 0; i < p.length; i++) {
+                     data[0][i] = p[i].getName()[0];
+                     data[1][i] = p[i].getName()[1];
+                     data[2][i] = p[i].getDrug();
+                     data[3][i] = p[i].getQuantity();
+                     data[4][i] = p[i].getTimestamp();
+                     prescription_list.add(p[i]);
+                  }
+                  PrescriptionTableModel model = new PrescriptionTableModel(prescription_list);
+                  JTable table = new JTable(model);
+                  table.setRowHeight(30);
+                  table.getTableHeader().setReorderingAllowed(false);
+                  for (int i = 0; i < 5; i++) {
+                     table.getColumnModel().getColumn(i).setPreferredWidth(100);
+                  }
                   // list.setAlignmentX(Component.CENTER_ALIGNMENT);
                   JPanel temp = (JPanel) tabbed_pane.getSelectedComponent();
-                  temp.removeAll();
-                  temp.setLayout(new BoxLayout(temp, BoxLayout.Y_AXIS));
-                  temp.add(labels);
-                  temp.add(list);
+                  temp.add(new JScrollPane(table));
                }
             }
          
