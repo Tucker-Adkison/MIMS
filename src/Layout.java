@@ -39,7 +39,7 @@ public class Layout {
             public void stateChanged(ChangeEvent e) {
                if (tabbed_pane.getSelectedIndex() == 1) {
                   Prescription[] p = Save.deserializeArray().toArray(new Prescription[0]);
-                  JLabel labels = new JLabel("First Name\tSecond Name\tDrug\tQuantity\t");
+                  JLabel labels = new JLabel("First Name\tSecond Name\tDrug\tQuantity\tTime-Stamp\t");
                   JList<Prescription> list = new JList<Prescription>(p);
                   JPanel temp = (JPanel) tabbed_pane.getSelectedComponent();
                   temp.removeAll();
