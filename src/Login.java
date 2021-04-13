@@ -1,7 +1,6 @@
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
@@ -50,7 +49,7 @@ public class Login {
                 String username = user_field.getText();
                 char[] password = pass_field.getPassword();
 
-                if (username != "" && password.length != 1){
+                if (username != ""){
                     try {
                         Scanner scanner = new Scanner(new File("login.txt"));
                         while (scanner.hasNextLine()) {

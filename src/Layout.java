@@ -1,5 +1,6 @@
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Component;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -40,7 +41,9 @@ public class Layout {
                if (tabbed_pane.getSelectedIndex() == 1) {
                   Prescription[] p = Save.deserializeArray().toArray(new Prescription[0]);
                   JLabel labels = new JLabel("First Name\tSecond Name\tDrug\tQuantity\tTime-Stamp\t");
+                  labels.setAlignmentX(Component.CENTER_ALIGNMENT);
                   JList<Prescription> list = new JList<Prescription>(p);
+                  // list.setAlignmentX(Component.CENTER_ALIGNMENT);
                   JPanel temp = (JPanel) tabbed_pane.getSelectedComponent();
                   temp.removeAll();
                   temp.setLayout(new BoxLayout(temp, BoxLayout.Y_AXIS));
@@ -67,6 +70,7 @@ public class Layout {
          JLabel l = new JLabel(labels[i], JLabel.TRAILING);
          p.add(l);
          JTextField text_field = new JTextField(20);
+         
          field_list[i] = text_field;
          text_field.setMaximumSize(text_field.getPreferredSize());
          l.setLabelFor(text_field);
