@@ -15,7 +15,7 @@ public class Save {
     */
    public static void serializeArray(ArrayList<Prescription> prescriptions) {
       try {
-         FileOutputStream fileOut = new FileOutputStream("prescriptions.ser");
+         FileOutputStream fileOut = new FileOutputStream("data/prescriptions.ser");
          ObjectOutputStream out = new ObjectOutputStream(fileOut);
          out.writeObject(prescriptions);
          out.close();
@@ -33,7 +33,7 @@ public class Save {
    public static ArrayList<Prescription> deserializeArray() {
       ArrayList<Prescription> prescriptions = null;
       try {
-         FileInputStream fileIn = new FileInputStream("prescriptions.ser");
+         FileInputStream fileIn = new FileInputStream("data/prescriptions.ser");
          ObjectInputStream in = new ObjectInputStream(fileIn);
          prescriptions = (ArrayList<Prescription>) in.readObject();
          in.close();

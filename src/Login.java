@@ -51,7 +51,7 @@ public class Login {
 
                 if (username != ""){
                     try {
-                        Scanner scanner = new Scanner(new File("login.txt"));
+                        Scanner scanner = new Scanner(new File("data/login.txt"));
                         while (scanner.hasNextLine()) {
                             String[] line = scanner.nextLine().split("\\s+");
                             char[] input_pass = line[1].toCharArray();
