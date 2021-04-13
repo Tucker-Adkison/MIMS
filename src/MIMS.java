@@ -13,8 +13,9 @@ class MIMS {
       frame.setSize(frame_size, frame_size);
       frame.setVisible(true);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      Layout layout = new Layout();
-      layout.addTabPane();
+
+      Login login = new Login();
+      login.addLoginScreen();
    }
 
    public static JFrame getFrame() {
