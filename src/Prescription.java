@@ -20,7 +20,7 @@ public class Prescription implements Serializable{
    } 
 
    public String toString() {
-      return first_name + " " + last_name + " " + drug + " " + String.valueOf(quantity);
+      return first_name + " " + last_name + " " + drug + " " + String.valueOf(quantity) + " " + time_stamp;
    }
 
    // getters 
