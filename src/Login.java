@@ -5,7 +5,11 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
+import java.awt.Image;
+
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,6 +30,15 @@ public class Login {
         JPanel lPanel = new JPanel();
         lPanel.setLayout(new BoxLayout(lPanel, BoxLayout.PAGE_AXIS));
 
+        ImageIcon icon = new ImageIcon("../data/icon.png");
+        Image image = icon.getImage();
+        Image scaled = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        ImageIcon newimg = new ImageIcon(scaled);
+        JLabel imageLabel = new JLabel(newimg);
+        imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        imageLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+        lPanel.add(imageLabel);
+
         JTextField user_field = new JTextField(20);
         JPasswordField pass_field = new JPasswordField(20);
         user_field.setMaximumSize(user_field.getPreferredSize());
@@ -34,13 +47,20 @@ public class Login {
         pass_field.setText("");
 
         JLabel user_label = new JLabel("Username");
+        user_label.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
         user_label.setAlignmentX(Component.CENTER_ALIGNMENT);
         lPanel.add(user_label);
         lPanel.add(user_field);
         JLabel pass_label = new JLabel("Password");
+        pass_label.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
         pass_label.setAlignmentX(Component.CENTER_ALIGNMENT);
         lPanel.add(pass_label);
         lPanel.add(pass_field);
+
+        JLabel empty_label = new JLabel();
+        empty_label.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+        lPanel.add(empty_label);
+
         frame.add(lPanel);
 
         JButton submit = new JButton("Submit");

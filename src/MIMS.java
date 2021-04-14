@@ -1,3 +1,5 @@
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 class MIMS {
@@ -13,6 +15,7 @@ class MIMS {
       frame.setSize(frame_size, frame_size);
       frame.setVisible(true);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.setResizable(false);
 
       Login login = new Login();
       login.addLoginScreen();
