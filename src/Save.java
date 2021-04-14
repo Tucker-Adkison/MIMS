@@ -3,10 +3,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;  
+import java.util.ArrayList;
 
 public class Save {
    /**
@@ -15,7 +14,7 @@ public class Save {
     */
    public static void serializeArray(ArrayList<Prescription> prescriptions) {
       try {
-         FileOutputStream fileOut = new FileOutputStream("data/prescriptions.ser");
+         FileOutputStream fileOut = new FileOutputStream("../data/prescriptions.ser");
          ObjectOutputStream out = new ObjectOutputStream(fileOut);
          out.writeObject(prescriptions);
          out.close();
@@ -30,11 +29,13 @@ public class Save {
     * This method deserializes our "prescription.ser" file and returns
     * the prescriptions in an array
     */
+   @SuppressWarnings("unchecked")
    public static ArrayList<Prescription> deserializeArray() {
       ArrayList<Prescription> prescriptions = null;
       try {
-         FileInputStream fileIn = new FileInputStream("data/prescriptions.ser");
+         FileInputStream fileIn = new FileInputStream("../data/prescriptions.ser");
          ObjectInputStream in = new ObjectInputStream(fileIn);
+         
          prescriptions = (ArrayList<Prescription>) in.readObject();
          in.close();
          fileIn.close();

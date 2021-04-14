@@ -1,27 +1,20 @@
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Component;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-
-import java.awt.Dimension;
 
 public class Layout {
    private JPanel listPanel;
@@ -61,15 +54,16 @@ public class Layout {
                      data[4][i] = p[i].getTimestamp();
                      prescription_list.add(p[i]);
                   }
-                  PrescriptionTableModel model = new PrescriptionTableModel(prescription_list);
+                  PrescriptionTableModel<String> model = new PrescriptionTableModel<String>(prescription_list);
                   JTable table = new JTable(model);
                   table.setRowHeight(30);
                   table.getTableHeader().setReorderingAllowed(false);
                   for (int i = 0; i < 5; i++) {
                      table.getColumnModel().getColumn(i).setPreferredWidth(100);
                   }
-                  // list.setAlignmentX(Component.CENTER_ALIGNMENT);
+
                   JPanel temp = (JPanel) tabbed_pane.getSelectedComponent();
+                  temp.removeAll();
                   temp.add(new JScrollPane(table));
                }
             }
