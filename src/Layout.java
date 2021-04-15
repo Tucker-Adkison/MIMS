@@ -39,6 +39,9 @@ public class Layout {
       JPanel list_panel = listPanel;
       tabbed_pane.addTab("Prescriptions", list_panel);
 
+      JPanel order_panel = Order.getPanel();
+      tabbed_pane.addTab("Order", order_panel);
+
       tabbed_pane.addChangeListener(
          new ChangeListener(){
             public void stateChanged(ChangeEvent e) {
