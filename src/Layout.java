@@ -6,6 +6,13 @@ import javax.swing.JTable;
 import java.util.ArrayList;
 import java.util.List;
 
+// NOTE: I know we don't want to use * for imports but this makes 
+// the double click events work and I can't find what exact imports
+// make it work because every stupid website tells me to use * so
+// unless you can figure out which specific event libraries to import,
+// we're stuck using *
+import java.awt.event.*; 
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
@@ -64,6 +71,20 @@ public class Layout {
                   for (int i = 0; i < 5; i++) {
                      table.getColumnModel().getColumn(i).setPreferredWidth(100);
                   }
+
+                  //Check for double click
+                  table.addMouseListener(new MouseAdapter() {
+                     public void mouseClicked(MouseEvent me) {
+                        if (me.getClickCount() == 2) {     // to detect doble click events
+                           JTable target = (JTable)me.getSource();
+                           int row = target.getSelectedRow(); // select a row
+                           int column = 2;
+                           String drug = table.getValueAt(row, column).toString();
+                           System.out.println(drug); // This can be removed once you get the order tab working
+                           //TODO Open order tab with the drug selected from the row
+                        }
+                     }
+                  });
 
                   JPanel temp = (JPanel) tabbed_pane.getSelectedComponent();
                   temp.removeAll();
