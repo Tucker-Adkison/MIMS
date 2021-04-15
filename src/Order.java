@@ -43,10 +43,23 @@ public class Order {
         order_button.addActionListener(
          new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                boolean notFound = true;
+                Prescription[] list = Save.deserializeArray().toArray(new Prescription[0]);
+                for (int i= 0; i < list.length; i++) {
+                    if (prescription.getText().equalsIgnoreCase(list[i].getDrug())) {
+                        notFound = false;
+                        break;
+                    }
+                }
                 if (credit_number.getText().replaceAll("\\s+","").isEmpty() || 
                     prescription.getText().replaceAll("\\s+","").isEmpty() ||
                     experation.getText().replaceAll("\\s+","").isEmpty() ||
                     name.getText().replaceAll("\\s+","").isEmpty()) {
+                        showMessageDialog(null, "ERROR: One or more fields is empty.");
+                        return;
+                }
+                if (notFound) {
+                    showMessageDialog(null, "ERROR: Prescription not found.");
                     return;
                 }
                 showMessageDialog(null, "Your order has been placed.");
