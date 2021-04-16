@@ -32,7 +32,10 @@ public class PrescriptionTableModel<T> extends AbstractTableModel
     @Override
     public Class<?> getColumnClass(int columnIndex)
     {
-        return columnClass[columnIndex];
+        if (prescription_list.isEmpty()) {
+            return Object.class;
+        }
+        return getValueAt(0, columnIndex).getClass();
     }
  
     @Override

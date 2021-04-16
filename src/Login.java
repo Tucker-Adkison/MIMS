@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Login {
     private JFrame frame;
@@ -63,10 +64,33 @@ public class Login {
 
         frame.add(lPanel);
 
+        user_field.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cont(user_field, pass_field, lPanel);
+            }
+        });
+
+        pass_field.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cont(user_field, pass_field, lPanel);;
+            }
+        });
+
         JButton submit = new JButton("Submit");
         submit.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) {
-                String username = user_field.getText();
+                cont(user_field, pass_field, lPanel);;
+            }
+        });
+
+        submit.setAlignmentX(Component.CENTER_ALIGNMENT);
+        lPanel.add(submit);
+        frame.repaint();
+        frame.revalidate();
+    }
+
+    public void cont(JTextField user_field, JPasswordField pass_field, JPanel lPanel) {
+        String username = user_field.getText();
                 char[] password = pass_field.getPassword();
 
                 if (username != ""){
@@ -87,13 +111,7 @@ public class Login {
                         ex.printStackTrace();
                     }
                 }
-            }
-        });
-
-        submit.setAlignmentX(Component.CENTER_ALIGNMENT);
-        lPanel.add(submit);
-        frame.repaint();
-        frame.revalidate();
+                showMessageDialog(null, "ERROR: Invalid Login");
     }
 
 }

@@ -86,6 +86,8 @@ public class Layout {
                      }
                   });
 
+                  table.setAutoCreateRowSorter(true);
+
                   JPanel temp = (JPanel) tabbed_pane.getSelectedComponent();
                   temp.removeAll();
                   temp.add(new JScrollPane(table));

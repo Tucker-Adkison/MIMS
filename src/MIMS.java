@@ -29,6 +29,5 @@ class MIMS {
       frame.setSize(size, size);
       frame.revalidate();
       frame_size = size;
-   
    }
 }
