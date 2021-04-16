@@ -23,7 +23,7 @@ public class Order {
         JTextField prescription = new JTextField(20);
         prescription.setText("Tylenol");
         prescription.setMaximumSize(prescription.getPreferredSize());
-        DateFormat format = new SimpleDateFormat("mm-yy");
+        DateFormat format = new SimpleDateFormat("MM/yy");
         JFormattedTextField experation = new JFormattedTextField(format);
         experation.setText("02/03");
         experation.setMaximumSize(experation.getPreferredSize());
