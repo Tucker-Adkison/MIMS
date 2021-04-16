@@ -12,9 +12,9 @@ public class Save {
     * This method takes an array of prescriptions and then writes it
     * to a file called "prescriptions.ser"
     */
-   public static void serializeArray(ArrayList<Prescription> prescriptions) {
+   public static <T> void serializeArray(ArrayList<T> prescriptions, String file) {
       try {
-         FileOutputStream fileOut = new FileOutputStream("../data/prescriptions.ser");
+         FileOutputStream fileOut = new FileOutputStream(file);
          ObjectOutputStream out = new ObjectOutputStream(fileOut);
          out.writeObject(prescriptions);
          out.close();
@@ -30,13 +30,13 @@ public class Save {
     * the prescriptions in an array
     */
    @SuppressWarnings("unchecked")
-   public static ArrayList<Prescription> deserializeArray() {
-      ArrayList<Prescription> prescriptions = null;
+   public static <T> ArrayList<T> deserializeArray(String file) {
+      ArrayList<T> prescriptions = null;
       try {
-         FileInputStream fileIn = new FileInputStream("../data/prescriptions.ser");
+         FileInputStream fileIn = new FileInputStream(file);
          ObjectInputStream in = new ObjectInputStream(fileIn);
          
-         prescriptions = (ArrayList<Prescription>) in.readObject();
+         prescriptions = (ArrayList<T>) in.readObject();
          in.close();
          fileIn.close();
       } catch (IOException | ClassNotFoundException e) {
@@ -54,27 +54,36 @@ public class Save {
       return prescriptions;
    }
 
+   public static void addLogin(String login) {
+      ArrayList<String> list = deserializeArray("../data/login.ser");
+      if (list == null) {
+         list = new ArrayList<String>();
+      }
+      list.add(login);
+      serializeArray(list, "../data/login.ser");
+   }
+
    /**
     * This method deserializes our "perscriptions.ser" file, stores it
     * in an array, adds the new prescription to the array, and finally
     * serializes the array into the original file
     */
    public static void addPrescription(Prescription prescription) {
-      ArrayList<Prescription> list = deserializeArray();
+      ArrayList<Prescription> list = deserializeArray("../data/prescriptions.ser");
       if (list == null) {
          list = new ArrayList<Prescription>();
       }
       list.add(prescription);
-      serializeArray(list);
+      serializeArray(list, "../data/prescriptions.ser");
    }
 
    public static void deletePrescription(Prescription p) {
-      ArrayList<Prescription> list = deserializeArray();
+      ArrayList<Prescription> list = deserializeArray("../data/prescriptions.ser");
       if (list == null) {
          return;
       }
       list.remove(p);
-      serializeArray(list);
+      serializeArray(list, "../data/prescriptions.ser");
    }
 
    public static String timeStamp() {

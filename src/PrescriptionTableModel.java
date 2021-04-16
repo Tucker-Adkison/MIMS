@@ -12,7 +12,7 @@ public class PrescriptionTableModel<T> extends AbstractTableModel
     private final List<Prescription> prescription_list;
      
     private final String[] columnNames = new String[] {
-            "First Name", "Second Name", "Drug", "Quantity", "Time-Stamp"
+            "First Name", "Second Name", "Drug", "Price", "Time-Stamp"
     };
     private final Class<?>[] columnClass = new Class[] {
         String.class, String.class, String.class, String.class, String.class
@@ -64,7 +64,7 @@ public class PrescriptionTableModel<T> extends AbstractTableModel
             return row.getDrug();
         }
         else if(3 == columnIndex) {
-            return row.getQuantity();
+            return row.getPrice();
         }
         else if(4 == columnIndex) {
             return row.getTimestamp();

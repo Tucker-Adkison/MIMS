@@ -41,7 +41,7 @@ public class test {
       System.out.println("First Name: " + p.getName()[0]);
       System.out.println("Last Name: " + p.getName()[1]);
       System.out.println("Drug: " + p.getDrug());
-      System.out.println("Quantity: " + p.getQuantity());
+      System.out.println("Price: " + p.getPrice());
       System.out.println("Time-stamp: " + p.getTimestamp());
    }
 }

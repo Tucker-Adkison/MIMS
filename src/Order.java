@@ -44,7 +44,7 @@ public class Order {
          new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 boolean notFound = true;
-                Prescription[] list = Save.deserializeArray().toArray(new Prescription[0]);
+                Prescription[] list = Save.deserializeArray("../data/prescriptions.ser").toArray(new Prescription[0]);
                 for (int i= 0; i < list.length; i++) {
                     if (prescription.getText().equalsIgnoreCase(list[i].getDrug())) {
                         notFound = false;

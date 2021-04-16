@@ -8,19 +8,19 @@ public class Prescription implements Serializable{
    private String first_name;
    private String last_name;
    private String drug;
-   private int quantity;
+   private float price;
    private String time_stamp;
 
    public Prescription(String fn, String ln, String d, String q, String ts) {
       first_name = fn;
       last_name = ln;
       drug = d;
-      quantity = Integer.parseInt(q);
+      price = Float.parseFloat(q);
       time_stamp = ts;
    } 
 
    public String toString() {
-      return first_name + " " + last_name + " " + drug + " " + String.valueOf(quantity) + " " + time_stamp;
+      return first_name + " " + last_name + " " + drug + " " + String.valueOf(price) + " " + time_stamp;
    }
 
    // getters 
@@ -32,8 +32,8 @@ public class Prescription implements Serializable{
       return drug;
    }
 
-   public int getQuantity() {
-      return quantity;
+   public float getPrice() {
+      return price;
    }
 
    public String getTimestamp() {
@@ -50,7 +50,7 @@ public class Prescription implements Serializable{
       drug = d;
    } 
 
-   public void setQuantity(int q) {
-      quantity = q;
+   public void setPrice(float q) {
+      price = q;
    }
 }

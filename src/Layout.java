@@ -5,7 +5,8 @@ import javax.swing.JTable;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 // NOTE: I know we don't want to use * for imports but this makes 
 // the double click events work and I can't find what exact imports
 // make it work because every stupid website tells me to use * so
@@ -27,7 +28,6 @@ public class Layout {
    private JPanel listPanel;
    private JTabbedPane tabbed_pane;
    private JLabel err;
-   
 
    public Layout() {
       listPanel = new JPanel();
@@ -35,7 +35,7 @@ public class Layout {
    }
 
    // create a tabbed pane with two tabs 
-   public void addTabPane() {
+   public JTabbedPane addTabPane() {
       JFrame frame = MIMS.getFrame();
       tabbed_pane = new JTabbedPane();
       frame.add(tabbed_pane);
@@ -53,14 +53,14 @@ public class Layout {
          new ChangeListener(){
             public void stateChanged(ChangeEvent e) {
                if (tabbed_pane.getSelectedIndex() == 1) {
-                  Prescription[] p = Save.deserializeArray().toArray(new Prescription[0]);
+                  Prescription[] p = Save.deserializeArray("../data/prescriptions.ser").toArray(new Prescription[0]);
                   Object[][] data = new Object[5][p.length];
                   List<Prescription> prescription_list = new ArrayList<Prescription>();
                   for (int i = 0; i < p.length; i++) {
                      data[0][i] = p[i].getName()[0];
                      data[1][i] = p[i].getName()[1];
                      data[2][i] = p[i].getDrug();
-                     data[3][i] = p[i].getQuantity();
+                     data[3][i] = p[i].getPrice();
                      data[4][i] = p[i].getTimestamp();
                      prescription_list.add(p[i]);
                   }
@@ -81,7 +81,6 @@ public class Layout {
                            int column = 2;
                            String drug = table.getValueAt(row, column).toString();
                            System.out.println(drug); // This can be removed once you get the order tab working
-                           //TODO Open order tab with the drug selected from the row
                         }
                      }
                   });
@@ -94,7 +93,9 @@ public class Layout {
                }
             }
          
-         });
+         }
+      );
+      return tabbed_pane;
    }
 
    // panel for making a new prescription
@@ -103,7 +104,7 @@ public class Layout {
       p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
    
       // Presciptionts have a name, quantity, and drug 
-      String[] labels = {"First Name: ", "Last Name: ", "Drug: ", "Quantity: "};
+      String[] labels = {"First Name: ", "Last Name: ", "Drug: ", "Price: "};
       int num_pairs = labels.length;
       JTextField[] field_list = new JTextField[num_pairs];
    
@@ -135,21 +136,20 @@ public class Layout {
                String first_name = field_list[0].getText();
                String last_name = field_list[1].getText();
                String drug = field_list[2].getText();
-               String quantity = field_list[3].getText();
+               String price = field_list[3].getText();
                String time_stamp = Save.timeStamp();
             
             // if the quantity is not an integer then do not set the presciption
                JPanel pane = (JPanel) tabbed_pane.getSelectedComponent();
-               try {
-                  Integer.parseInt(field_list[3].getText());
-               } catch (NumberFormatException ex) {
+               Pattern pattern = Pattern.compile("^\\d+\\.\\d{1,2}?$");
+               Matcher matcher = pattern.matcher(field_list[3].getText());
+               if (!matcher.find()) {
                   if (err == null) {
                      err = new JLabel("Could not add Prescription");
                      pane.add(err);
                      MIMS.getFrame().revalidate();
                   }
                   return;
-                  // ex.printStackTrace();
                }
                if (err != null) {
                   System.out.println(err);
@@ -157,7 +157,7 @@ public class Layout {
                   MIMS.getFrame().repaint();
                   err = null;
                }
-               Prescription p = new Prescription(first_name, last_name, drug, quantity, time_stamp);
+               Prescription p = new Prescription(first_name, last_name, drug, price, time_stamp);
                Save.addPrescription(p);
             }
          });
