@@ -32,8 +32,8 @@ public class Prescription implements Serializable{
       return drug;
    }
 
-   public float getPrice() {
-      return price;
+   public String getPrice() {
+      return "$" + price;
    }
 
    public String getTimestamp() {
