@@ -55,12 +55,12 @@ public class Save {
    }
 
    public static void addLogin(String login) {
-      ArrayList<String> list = deserializeArray("../data/login.ser");
+      ArrayList<String> list = deserializeArray("data/login.ser");
       if (list == null) {
          list = new ArrayList<String>();
       }
       list.add(login);
-      serializeArray(list, "../data/login.ser");
+      serializeArray(list, "data/login.ser");
    }
 
    /**
@@ -69,21 +69,21 @@ public class Save {
     * serializes the array into the original file
     */
    public static void addPrescription(Prescription prescription) {
-      ArrayList<Prescription> list = deserializeArray("../data/prescriptions.ser");
+      ArrayList<Prescription> list = deserializeArray("data/prescriptions.ser");
       if (list == null) {
          list = new ArrayList<Prescription>();
       }
       list.add(prescription);
-      serializeArray(list, "../data/prescriptions.ser");
+      serializeArray(list, "data/prescriptions.ser");
    }
 
    public static void deletePrescription(Prescription p) {
-      ArrayList<Prescription> list = deserializeArray("../data/prescriptions.ser");
+      ArrayList<Prescription> list = deserializeArray("data/prescriptions.ser");
       if (list == null) {
          return;
       }
       list.remove(p);
-      serializeArray(list, "../data/prescriptions.ser");
+      serializeArray(list, "data/prescriptions.ser");
    }
 
    public static String timeStamp() {

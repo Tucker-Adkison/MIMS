@@ -14,9 +14,6 @@ public class PrescriptionTableModel<T> extends AbstractTableModel
     private final String[] columnNames = new String[] {
             "First Name", "Second Name", "Drug", "Price", "Time-Stamp"
     };
-    private final Class<?>[] columnClass = new Class[] {
-        String.class, String.class, String.class, String.class, String.class
-    };
  
     public PrescriptionTableModel(List<Prescription> prescription_list)
     {

@@ -1,9 +1,6 @@
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
 import java.awt.Image;
@@ -101,7 +98,7 @@ public class Login {
         JPanel lPanel = new JPanel();
         lPanel.setLayout(new BoxLayout(lPanel, BoxLayout.PAGE_AXIS));
 
-        ImageIcon icon = new ImageIcon("../data/icon.png");
+        ImageIcon icon = new ImageIcon("data/icon.png");
         Image image = icon.getImage();
         Image scaled = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
         ImageIcon newimg = new ImageIcon(scaled);
@@ -164,7 +161,7 @@ public class Login {
         char[] password = pass_field.getPassword();
 
         if (username != ""){
-            ArrayList<String> users = Save.deserializeArray("../data/login.ser");
+            ArrayList<String> users = Save.deserializeArray("data/login.ser");
             String[] admin = new String[] {"**", "&&"};
             for (String user : users) {
                 String[] line = user.split("\\s+");

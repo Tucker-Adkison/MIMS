@@ -46,14 +46,13 @@ public class Layout {
       JPanel list_panel = listPanel;
       tabbed_pane.addTab("Prescriptions", list_panel);
 
-      JPanel order_panel = Order.getPanel();
-      tabbed_pane.addTab("Order", order_panel);
+      
 
       tabbed_pane.addChangeListener(
          new ChangeListener(){
             public void stateChanged(ChangeEvent e) {
                if (tabbed_pane.getSelectedIndex() == 1) {
-                  Prescription[] p = Save.deserializeArray("../data/prescriptions.ser").toArray(new Prescription[0]);
+                  Prescription[] p = Save.deserializeArray("data/prescriptions.ser").toArray(new Prescription[0]);
                   Object[][] data = new Object[5][p.length];
                   List<Prescription> prescription_list = new ArrayList<Prescription>();
                   for (int i = 0; i < p.length; i++) {
@@ -78,9 +77,11 @@ public class Layout {
                         if (me.getClickCount() == 2) {     // to detect doble click events
                            JTable target = (JTable)me.getSource();
                            int row = target.getSelectedRow(); // select a row
-                           int column = 2;
-                           String drug = table.getValueAt(row, column).toString();
+                           String drug = table.getValueAt(row, 2).toString();
+                           String name = table.getValueAt(row, 0).toString() + " " +  table.getValueAt(row, 1).toString();
                            System.out.println(drug); // This can be removed once you get the order tab working
+                           JPanel order_panel = Order.getPanel(drug, name);
+                           tabbed_pane.addTab("Order", order_panel);
                         }
                      }
                   });
