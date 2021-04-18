@@ -29,9 +29,9 @@ public class Order {
         // vertical grouping 
         GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
         
-        JLabel prescription_label = new JLabel("Prescription");
+        JLabel prescription_label = new JLabel("Prescription:");
         JLabel credit_label = new JLabel("Credit Card Number:");
-        JLabel date_label = new JLabel("Experation Date:");
+        JLabel date_label = new JLabel("Expiration Date:");
         JLabel name_label = new JLabel("Name On Card:");
         JLabel quantity_label = new JLabel("Quantity:");
 
@@ -45,9 +45,9 @@ public class Order {
         prescription.setMaximumSize(prescription.getPreferredSize());
 
         DateFormat format = new SimpleDateFormat("MM/yy");
-        JFormattedTextField experation = new JFormattedTextField(format);
-        experation.setText("02/03");
-        experation.setMaximumSize(experation.getPreferredSize());
+        JFormattedTextField expiration = new JFormattedTextField(format);
+        expiration.setText("02/03");
+        expiration.setMaximumSize(expiration.getPreferredSize());
 
         JTextField name_field = new JTextField(20);
         name_field.setText(name);
@@ -61,7 +61,7 @@ public class Order {
 
         order_panel.add(credit_number);
         order_panel.add(prescription);
-        order_panel.add(experation);
+        order_panel.add(expiration);
         order_panel.add(name_field);
         order_panel.add(order_button);
 
@@ -78,7 +78,7 @@ public class Order {
                 }
                 if (credit_number.getText().replaceAll("\\s+","").isEmpty() || 
                     prescription.getText().replaceAll("\\s+","").isEmpty() ||
-                    experation.getText().replaceAll("\\s+","").isEmpty() ||
+                    expiration.getText().replaceAll("\\s+","").isEmpty() ||
                     name_field.getText().replaceAll("\\s+","").isEmpty()) {
                         showMessageDialog(null, "ERROR: One or more fields is empty.");
                         return;
@@ -97,7 +97,7 @@ public class Order {
         .addComponent(quantity_label));
         hGroup.addGroup(layout.createParallelGroup()
         .addComponent(prescription).addComponent(credit_number)
-        .addComponent(experation).addComponent(name_field)
+        .addComponent(expiration).addComponent(name_field)
         .addComponent(quantity).addComponent(order_button));
         layout.setHorizontalGroup(hGroup);
 
@@ -106,7 +106,7 @@ public class Order {
         vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE).
             addComponent(credit_label).addComponent(credit_number));
         vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE).
-            addComponent(date_label).addComponent(experation));
+            addComponent(date_label).addComponent(expiration));
         vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE).
             addComponent(name_label).addComponent(name_field));
         vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE).

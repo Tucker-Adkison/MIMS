@@ -51,6 +51,13 @@ public class Layout {
       tabbed_pane.addChangeListener(
          new ChangeListener(){
             public void stateChanged(ChangeEvent e) {
+               //Remove order tab if it is deselected
+               if (tabbed_pane.getSelectedIndex() != 2) {
+                  if (tabbed_pane.getTabCount() == 3) {
+                     tabbed_pane.remove(2);
+                  }
+               }
+               
                if (tabbed_pane.getSelectedIndex() == 1) {
                   Prescription[] p = Save.deserializeArray("data/prescriptions.ser").toArray(new Prescription[0]);
                   Object[][] data = new Object[5][p.length];
