@@ -162,12 +162,12 @@ public class Login {
 
         if (username != ""){
             ArrayList<String> users = Save.deserializeArray("data/login.ser");
-            String[] admin = new String[] {"**", "&&"};
+            users.add("** &&");
+            System.out.println(users);
             for (String user : users) {
                 String[] line = user.split("\\s+");
                 char[] input_pass = line[1].toCharArray();
-                if (line[0].equals(username) && Arrays.equals(password, input_pass) || 
-                    admin[0].equals(username) && Arrays.equals(password, admin[1].toCharArray())) {
+                if (line[0].equals(username) && Arrays.equals(password, input_pass)) {
                     frame.remove(lPanel);
                     JTabbedPane pane = layout.addTabPane();
                     frame.setJMenuBar(this.loginMenuPane(pane));

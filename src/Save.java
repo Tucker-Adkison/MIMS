@@ -42,6 +42,7 @@ public class Save {
       } catch (IOException | ClassNotFoundException e) {
          if (e instanceof ClassNotFoundException)
             System.out.println("Prescription class not found");
+         return new ArrayList<T>();
       }
       // System.out.println("Deserialized Prescriptions...");
       // for (int i = 0; i < prescriptions.length; i++) {

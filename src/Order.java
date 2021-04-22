@@ -2,7 +2,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import java.awt.event.ActionListener;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout;
 import javax.swing.JFormattedTextField;
